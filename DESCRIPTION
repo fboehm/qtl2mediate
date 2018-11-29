@@ -21,4 +21,4 @@ Suggests:
 License: GPL-3
 LazyData: TRUE
 URL: https://github.com/churchill-lab/intermediate
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1

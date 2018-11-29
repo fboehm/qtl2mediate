@@ -111,8 +111,12 @@ mediation_scan <- function(target,
   }
   output <- annotation
   # Compute LOD (fitFunction provides LL, so divide by log(10))
-  output$lod <- unlist(purrr::map(med_pur, mapfn, target, covar, driver, loglik0)) /
+  output$loglik1 <- unlist(purrr::map(med_pur, function(loglik, loglik0) loglik[1], target, covar, driver, loglik0)) /
     log(10)
+  output$lod_diff <- unlist(purrr::map(med_pur, function(loglik, loglik0) loglik[2] - loglik[1], target, covar, driver, loglik0)) /
+    log(10) 
+  output$double_lod_diff <- unlist(purrr::map(med_pur, function(loglik, loglik0) loglik0 - (loglik[2] - loglik[1]), target, covar, driver, loglik0)) /
+    log(10) 
   attr(output, "targetFit") <- loglik0 / log(10)
   attr(output, "facet_name") <- facet_name
   attr(output, "index_name") <- index_name
