@@ -5,10 +5,10 @@ fit1_med <- function(driver,
                      mediator,
                      addcovar = NULL
 ){
-  ll_d <- logLik(lm(target ~ driver + addcovar))
-  ll_dm <- logLik(lm(target ~ driver + mediator + addcovar))
-  ll_1 <- logLik(lm(target ~ 1 + addcovar))
-  ll_1m <- logLik(lm(target ~ 1 + mediator + addcovar))
+  ll_d <- as.vector(logLik(lm(target ~ driver + addcovar)))
+  ll_dm <- as.vector(logLik(lm(target ~ driver + mediator + addcovar)))
+  ll_1 <- as.vector(logLik(lm(target ~ 1 + addcovar)))
+  ll_1m <- as.vector(logLik(lm(target ~ 1 + mediator + addcovar)))
   out <- tibble::tibble(ll_d, ll_dm, ll_1, ll_1m)
   return(out)
 }
