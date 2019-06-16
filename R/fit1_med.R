@@ -13,6 +13,8 @@ fit1_med <- function(driver,
   return(out)
 }
 
+
+#' @export
 fit1_med_qtl2 <- function(driver,
                      target,
                      mediator,
@@ -23,12 +25,12 @@ fit1_med_qtl2 <- function(driver,
                            pheno = target, 
                            kinship = kinship, 
                            addcovar = addcovar
-                           )
+                           )$lod
   lod_med <- qtl2::fit1(genoprobs = driver, 
                         pheno = target, 
                         kinship = kinship, 
                         addcovar = cbind(addcovar, mediator)
-                        )
+                        )$lod
   
   out <- tibble::tibble(lod_no_med, lod_med)
   return(out)
